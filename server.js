@@ -7,6 +7,7 @@ app.use(cors());
 
 let chillies = [];
 let count = 0;
+
 app.get('/chillies', (req,res)=> {
   res.send(chillies);
   console.log('get all chillies');
@@ -27,7 +28,10 @@ app.get('/chillies/:id', (req, res) => {
 });
 
 app.post('/chillies', (req, res) => {
-  console.log('add a chilli');
+  const newChilli = { id: count, ...req.body };
+  count =count +1;
+  chillies.push(newChilli);
+  res.send(newChilli);
 });
 
 app.put('/chillies/:id', (req, res) => {
